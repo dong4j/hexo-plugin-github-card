@@ -1,0 +1,257 @@
+/**
+ * GitHub repository link card.
+ *
+ * The card intentionally owns its light, dark and interactive colors. AnZhiYu
+ * applies broad link hover styles inside article content, so every visible
+ * surface is painted explicitly to prevent the theme accent from leaking into
+ * the card and making its text unreadable.
+ */
+
+#article-container a.hexo-github-card,
+a.hexo-github-card {
+  --github-card-accent: #0969da;
+  --github-card-background: #ffffff;
+  --github-card-surface: #f6f8fa;
+  --github-card-text: #1f2328;
+  --github-card-muted: #59636e;
+  --github-card-border-color: #d0d7de;
+  --github-card-hover-border: #8c959f;
+  --github-card-shadow: 0 6px 18px rgba(31, 35, 40, 0.06);
+  --github-card-hover-shadow: 0 12px 28px rgba(31, 35, 40, 0.12);
+  position: relative;
+  display: block;
+  margin: 1.35rem 0;
+  overflow: hidden;
+  border: 1px solid var(--github-card-border-color) !important;
+  border-radius: 12px;
+  background: var(--github-card-background) !important;
+  box-shadow: var(--github-card-shadow);
+  color: var(--github-card-text) !important;
+  text-decoration: none !important;
+  transform: translateY(0);
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+[data-theme='dark'] #article-container a.hexo-github-card,
+[data-theme='dark'] a.hexo-github-card {
+  --github-card-accent: #58a6ff;
+  --github-card-background: #0d1117;
+  --github-card-surface: #161b22;
+  --github-card-text: #f0f6fc;
+  --github-card-muted: #8c959f;
+  --github-card-border-color: #30363d;
+  --github-card-hover-border: #58a6ff;
+  --github-card-shadow: 0 8px 24px rgba(1, 4, 9, 0.24);
+  --github-card-hover-shadow: 0 14px 32px rgba(1, 4, 9, 0.38);
+}
+
+/* Keep all link states stable even when the active theme styles article links. */
+#article-container a.hexo-github-card:visited,
+a.hexo-github-card:visited {
+  border-color: var(--github-card-border-color) !important;
+  background: var(--github-card-background) !important;
+  color: var(--github-card-text) !important;
+  text-decoration: none !important;
+}
+
+#article-container a.hexo-github-card:hover,
+#article-container a.hexo-github-card:focus,
+a.hexo-github-card:hover,
+a.hexo-github-card:focus {
+  border-color: var(--github-card-hover-border) !important;
+  background: var(--github-card-background) !important;
+  color: var(--github-card-text) !important;
+  text-decoration: none !important;
+}
+
+#article-container a.hexo-github-card:hover,
+a.hexo-github-card:hover {
+  box-shadow: var(--github-card-hover-shadow);
+  transform: translateY(-1px);
+}
+
+#article-container a.hexo-github-card:focus-visible,
+a.hexo-github-card:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--github-card-accent) 38%, transparent);
+  outline-offset: 3px;
+}
+
+.hexo-github-card,
+.hexo-github-card *,
+.hexo-github-card *::before,
+.hexo-github-card *::after {
+  box-sizing: border-box;
+}
+
+#article-container a.hexo-github-card .hexo-github-card__site,
+a.hexo-github-card .hexo-github-card__site {
+  display: flex;
+  min-height: 42px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 9px 15px;
+  border-bottom: 1px solid var(--github-card-border-color);
+  background: var(--github-card-surface) !important;
+  color: var(--github-card-muted) !important;
+  font-size: 0.8rem;
+  line-height: 1.2;
+}
+
+.hexo-github-card__site-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-weight: 650;
+  letter-spacing: 0.005em;
+}
+
+.hexo-github-card__site-label svg {
+  width: 17px;
+  height: 17px;
+  margin: 0;
+  fill: currentColor;
+}
+
+.hexo-github-card__repository {
+  overflow: hidden;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.73rem;
+  opacity: 0.86;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#article-container a.hexo-github-card .hexo-github-card__body,
+a.hexo-github-card .hexo-github-card__body {
+  display: grid;
+  grid-template-columns: minmax(220px, 30%) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(20px, 3vw, 34px);
+  padding: clamp(18px, 2.4vw, 26px);
+  background: var(--github-card-background) !important;
+  color: var(--github-card-text) !important;
+}
+
+.hexo-github-card--without-image .hexo-github-card__body {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.hexo-github-card__media {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  aspect-ratio: 2 / 1;
+  border: 1px solid var(--github-card-border-color);
+  border-radius: 9px;
+  background: var(--github-card-surface);
+  box-shadow: 0 2px 8px rgba(31, 35, 40, 0.08);
+}
+
+[data-theme='dark'] .hexo-github-card__media {
+  box-shadow: 0 3px 10px rgba(1, 4, 9, 0.3);
+}
+
+.hexo-github-card__media::after {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+  content: '';
+  pointer-events: none;
+}
+
+#article-container .hexo-github-card__media img,
+.hexo-github-card__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin: 0 !important;
+  border: 0;
+  border-radius: 0;
+  object-fit: cover;
+  transform: scale(1.001);
+  transition: transform 240ms ease;
+}
+
+.hexo-github-card:hover .hexo-github-card__media img {
+  transform: scale(1.015);
+}
+
+.hexo-github-card__content {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#article-container a.hexo-github-card .hexo-github-card__title,
+#article-container a.hexo-github-card:hover .hexo-github-card__title,
+a.hexo-github-card .hexo-github-card__title {
+  display: -webkit-box;
+  overflow: hidden;
+  color: var(--github-card-accent) !important;
+  font-size: clamp(0.98rem, 1.5vw, 1.16rem);
+  font-weight: 700;
+  letter-spacing: -0.012em;
+  line-height: 1.4;
+  text-wrap: balance;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+#article-container a.hexo-github-card .hexo-github-card__description,
+#article-container a.hexo-github-card:hover .hexo-github-card__description,
+a.hexo-github-card .hexo-github-card__description {
+  display: -webkit-box;
+  overflow: hidden;
+  color: var(--github-card-muted) !important;
+  font-size: clamp(0.88rem, 1.35vw, 0.98rem);
+  font-weight: 440;
+  line-height: 1.6;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+@media (max-width: 640px) {
+  #article-container a.hexo-github-card .hexo-github-card__site,
+  a.hexo-github-card .hexo-github-card__site {
+    padding: 9px 13px;
+  }
+
+  .hexo-github-card__repository {
+    display: none;
+  }
+
+  #article-container a.hexo-github-card .hexo-github-card__body,
+  a.hexo-github-card .hexo-github-card__body {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+    padding: 14px;
+  }
+
+  .hexo-github-card__content {
+    gap: 8px;
+  }
+
+  #article-container a.hexo-github-card .hexo-github-card__title,
+  a.hexo-github-card .hexo-github-card__title {
+    -webkit-line-clamp: 3;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hexo-github-card,
+  .hexo-github-card__media img {
+    transition: none;
+  }
+
+  #article-container a.hexo-github-card:hover,
+  a.hexo-github-card:hover,
+  .hexo-github-card:hover .hexo-github-card__media img {
+    transform: none;
+  }
+}

@@ -1,0 +1,43 @@
+name: Bug report
+description: Report reproducible incorrect behavior in the plugin.
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for taking the time to report a problem. Remove private repository names and credentials from examples.
+  - type: input
+    id: versions
+    attributes:
+      label: Environment
+      description: Include Node.js, Hexo, plugin, and theme versions.
+      placeholder: Node.js 22.x, Hexo 7.x, plugin 0.1.0, AnZhiYu
+    validations:
+      required: true
+  - type: textarea
+    id: markdown
+    attributes:
+      label: Minimal Markdown and configuration
+      description: Provide the smallest public example that reproduces the behavior.
+      render: markdown
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant logs
+      description: Paste only sanitized plugin or Hexo output.
+      render: shell

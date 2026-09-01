@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+# The test workflow only needs to read repository contents.
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Node.js ${{ matrix.node-version }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version:
+          - 18
+          - 20
+          - 22
+          - 24
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: npm
+
+      # Hexo is a peer dependency supplied by the consuming site. The focused
+      # unit tests use a small Hexo-compatible harness and do not install peers.
+      - name: Install dependencies
+        run: npm ci --omit=peer
+
+      - name: Run tests
+        run: npm test
+
+      - name: Inspect publish contents
+        run: npm pack --dry-run

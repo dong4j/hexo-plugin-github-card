@@ -1,0 +1,50 @@
+{
+  "name": "hexo-plugin-github-card",
+  "version": "0.1.0",
+  "description": "Automatically render standalone GitHub repository links as Open Graph preview cards in Hexo posts.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node --test",
+    "prepublishOnly": "npm test"
+  },
+  "keywords": [
+    "hexo",
+    "github",
+    "card",
+    "open-graph",
+    "link-preview"
+  ],
+  "homepage": "https://github.com/dong4j/hexo-plugin-github-card#readme",
+  "bugs": {
+    "url": "https://github.com/dong4j/hexo-plugin-github-card/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dong4j/hexo-plugin-github-card.git"
+  },
+  "author": {
+    "name": "dong4j",
+    "email": "dong4j@gmail.com",
+    "url": "https://github.com/dong4j"
+  },
+  "license": "MIT",
+  "files": [
+    "assets",
+    "index.js",
+    "CHANGELOG.md",
+    "LICENSE",
+    "README.md",
+    "README.zh-CN.md"
+  ],
+  "dependencies": {
+    "cheerio": "1.0.0",
+    "hexo-util": "3.3.0",
+    "open-graph-scraper": "6.10.0"
+  },
+  "peerDependencies": {
+    "hexo": "^6.0.0 || ^7.0.0 || ^8.0.0"
+  },
+  "engines": {
+    "node": ">=18.17"
+  }
+}
